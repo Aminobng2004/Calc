@@ -8,7 +8,7 @@
         /* Basic reset and body styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f0f5;
+            background-color: #fdf9f6;
             color: #333;
             padding: 20px;
             display: flex;
@@ -44,6 +44,13 @@
             margin-bottom: 20px;
         }
 
+        /* Link styles */
+        h3 a {
+            text-decoration: none;
+            color: #333;
+            font-size: 24px;
+        }
+
         /* Form group styles */
         .form-group {
             margin-bottom: 15px;
@@ -70,13 +77,13 @@
 
         /* Focus and hover styles for select and button */
         select:focus, button:focus {
-            border-color: #007BFF;
+            border-color: #ffae00;
             outline: none;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            box-shadow: 0 0 8px rgba(255, 174, 0, 0.2);
         }
 
         button {
-            background-color: #007BFF;
+            background-color: #ffae00;
             color: white;
             border: none;
             cursor: pointer;
@@ -85,7 +92,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #e69500;
             transform: scale(1.05);
         }
 
@@ -100,7 +107,7 @@
 
         /* Hover effect for form labels */
         .form-group:hover label {
-            color: #007BFF;
+            color: #ffae00;
             font-weight: bold;
         }
 
@@ -111,14 +118,14 @@
         }
 
         .form-group select:hover {
-            border-color: #007BFF;
+            border-color: #ffae00;
             background-color: #e9ecef;
         }
 
         .form-group select:focus {
-            border-color: #007BFF;
+            border-color: #ffae00;
             outline: none;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            box-shadow: 0 0 8px rgba(255, 174, 0, 0.2);
         }
 
         /* Styles for select options */
@@ -129,11 +136,69 @@
 </head>
 <body>
     <div class="container">
+        <h3><a href="https://56f7fd-5f.myshopify.com/">🦴🌿زيت شفاء مفاصل</a></h3>
         <h1>حاسبة الشحن</h1>
         <div class="form-group">
             <label for="wilaya">اختر الولاية:</label>
             <select id="wilaya">
-                <!-- Options will be dynamically added using JavaScript -->
+                <option value="1">أدرار</option>
+                <option value="2">الشلف</option>
+                <option value="3">الأغواط</option>
+                <option value="4">أم البواقي</option>
+                <option value="5">باتنة</option>
+                <option value="6">بجاية</option>
+                <option value="7">بسكرة</option>
+                <option value="8">بشار</option>
+                <option value="9">البليدة</option>
+                <option value="10">البويرة</option>
+                <option value="11">تمنراست</option>
+                <option value="12">تبسة</option>
+                <option value="13">تلمسان</option>
+                <option value="14">تيارت</option>
+                <option value="15">تيزي وزو</option>
+                <option value="16">الجزائر</option>
+                <option value="17">الجلفة</option>
+                <option value="18">جيجل</option>
+                <option value="19">سطيف</option>
+                <option value="20">سعيدة</option>
+                <option value="21">سكيكدة</option>
+                <option value="22">سيدي بلعباس</option>
+                <option value="23">عنابة</option>
+                <option value="24">قالمة</option>
+                <option value="25">قسنطينة</option>
+                <option value="26">المدية</option>
+                <option value="27">مستغانم</option>
+                <option value="28">المسيلة</option>
+                <option value="29">معسكر</option>
+                <option value="30">ورقلة</option>
+                <option value="31">وهران</option>
+                <option value="32">البيض</option>
+                <option value="33">الإليزي</option>
+                <option value="34">برج بوعريريج</option>
+                <option value="35">بومرداس</option>
+                <option value="36">الطارف</option>
+                <option value="37">تندوف</option>
+                <option value="38">تيسمسيلت</option>
+                <option value="39">الوادي</option>
+                <option value="40">خنشلة</option>
+                <option value="41">سوق أهراس</option>
+                <option value="42">تيبازة</option>
+                <option value="43">ميلة</option>
+                <option value="44">عين الدفلى</option>
+                <option value="45">النعامة</option>
+                <option value="46">عين تموشنت</option>
+                <option value="47">غرداية</option>
+                <option value="48">غليزان</option>
+                <option value="49">المغير</option>
+                <option value="50">المنيعة</option>
+                <option value="51">تيميمون</option>
+                <option value="52">برج باجي مختار</option>
+                <option value="53">أولاد جلال</option>
+                <option value="54">بني عباس</option>
+                <option value="55">إن صالح</option>
+                <option value="56">إن قزام</option>
+                <option value="57">توقرت</option>
+                <option value="58">جانت</option>
             </select>
         </div>
         <div class="form-group">
@@ -148,7 +213,6 @@
     </div>
 
     <script>
-        // JavaScript function to calculate shipping cost
         function calculateShipping() {
             var wilaya = document.getElementById('wilaya').value;
             var destination = document.getElementById('destination').value;
@@ -156,93 +220,31 @@
 
             // Realistic pricing strategy based on typical shipping costs
             var baseRates = {
-                '1': 1000, '2': 1200, '3': 1300, '4': 1100, '5': 1400, '6': 1500, '7': 1250, '8': 1600, '9': 900, '10': 1550,
-                '11': 1800, '12': 2000, '13': 2200, '14': 1900, '15': 2050, '16': 850, '17': 1250, '18': 1300, '19': 1000,
-                '20': 1050, '21': 1350, '22': 1200, '23': 1550, '24': 1400, '25': 1600, '26': 1100, '27': 1450, '28': 1250,
-                '29': 1350, '30': 1700, '31': 1150, '32': 1800, '33': 1950, '34': 2000, '35': 1650, '36': 2100, '37': 2250,
-                '38': 2300, '39': 1750, '40': 2400, '41': 2500, '42': 2550, '43': 2600, '44': 2650, '45': 2700, '46': 2750,
-                '47': 2800, '48': 2850, '49': 2900, '50': 2950, '51': 3000, '52': 3050, '53': 3100, '54': 3150, '55': 3200,
-                '56': 3250, '57': 3300, '58': 3350
+                '1': 800, '2': 1000, '3': 1100, '4': 900, '5': 1200, '6': 1300, '7': 1050, '8': 1400, '9': 700, '10': 1350,
+                '11': 1600, '12': 1800, '13': 2000, '14': 1700, '15': 1850, '16': 650, '17': 1050, '18': 1100,                 '19': 1150, '20': 900, '21': 1250, '22': 1400, '23': 1500, '24': 950, '25': 1100, '26': 1300, '27': 1200,
+                '28': 1000, '29': 1100, '30': 1500, '31': 900, '32': 1300, '33': 1600, '34': 1200, '35': 1400, '36': 1250,
+                '37': 1800, '38': 1500, '39': 1700, '40': 1000, '41': 950, '42': 1350, '43': 1100, '44': 1150, '45': 1700,
+                '46': 1500, '47': 2000, '48': 900, '49': 1200, '50': 1300, '51': 1600, '52': 2000, '53': 1400, '54': 1200,
+                '55': 1500, '56': 1800, '57': 1100, '58': 1700
             };
 
             // Determine the shipping cost based on selected wilaya
             if (wilaya in baseRates) {
                 shippingCost = baseRates[wilaya];
 
-                // Add additional cost if destination is home delivery
+                // Add additional cost for home delivery
                 if (destination === 'home') {
-                    shippingCost += 1500; // Additional cost for home delivery
+                    shippingCost += 500;
                 }
 
                 // Display the result
-                var resultElement = document.getElementById('result');
-                resultElement.innerHTML = `تكلفة الشحن إلى ولاية ${document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text} (${destination === 'home' ? 'توصيل إلى باب المنزل' : 'توصيل إلى مكتب التوصيل'}) هي ${shippingCost} دينار جزائري.`;
+                document.getElementById('result').innerText = `تكلفة الشحن هي ${shippingCost} دج`;
             } else {
-                // Handle case where wilaya is not found (though it should always exist in this setup)
-                alert('خطأ: يرجى اختيار ولاية صحيحة.');
+                // Display an error message if wilaya is not found
+                document.getElementById('result').innerText = 'يرجى اختيار ولاية صالحة';
             }
         }
-
-        // JavaScript function to populate wilaya options dynamically
-        document.addEventListener('DOMContentLoaded', function () {
-    var wilayaSelect = document.getElementById('wilaya');
-
-    // Populate wilaya options
-    var wilayas = {
-        '1': 'أدرار', '2': 'الشلف', '3': 'الأغواط', '4': 'أم البواقي', '5': 'باتنة', '6': 'بجاية', '7': 'بسكرة',
-        '8': 'بشار', '9': 'البليدة', '10': 'البويرة', '11': 'تمنراست', '12': 'تبسة', '13': 'تلمسان', '14': 'تيارت',
-        '15': 'تيزي وزو', '16': 'الجزائر', '17': 'الجلفة', '18': 'جيجل', '19': 'سطيف', '20': 'سعيدة', '21': 'سكيكدة',
-        '22': 'سيدي بلعباس', '23': 'عنابة', '24': 'قالمة', '25': 'قسنطينة', '26': 'المدية', '27': 'مستغانم', '28': 'المسيلة',
-        '29': 'معسكر', '30': 'ورقلة', '31': 'وهران', '32': 'البيض', '33': 'الإليزي', '34': 'برج بوعريريج', '35': 'بومرداس',
-        '36': 'الطارف', '37': 'تندوف', '38': 'تيسمسيلت', '39': 'الوادي', '40': 'خنشلة', '41': 'سوق أهراس', '42': 'تيبازة',
-        '43': 'ميلة', '44': 'عين الدفلى', '45': 'النعامة', '46': 'عين تموشنت', '47': 'غرداية', '48': 'غليزان',
-        '49': 'المغير', '50': 'المنيعة', '51': 'الناظور', '52': 'برج سعيد', '53': 'بني ورتيلان', '54': 'المريج',
-        '55': 'المزرعة', '56': 'أولاد سيدي ابراهيم', '57': 'ميهوب', '58': 'الحجار'
-    };
-
-    // Loop through the wilayas object and create options
-    for (var key in wilayas) {
-        var option = document.createElement('option');
-        option.value = key;
-        option.textContent = wilayas[key];
-        wilayaSelect.appendChild(option);
-    }
-});
-
-// JavaScript function to calculate shipping cost
-function calculateShipping() {
-    var wilaya = document.getElementById('wilaya').value;
-    var destination = document.getElementById('destination').value;
-    var shippingCost = 0;
-
-    // Realistic pricing strategy based on typical shipping costs
-    var baseRates = {
-        '1': 1000, '2': 1200, '3': 1300, '4': 1100, '5': 1400, '6': 1500, '7': 1250, '8': 1600, '9': 900, '10': 1550,
-        '11': 1800, '12': 2000, '13': 2200, '14': 1900, '15': 2050, '16': 850, '17': 1250, '18': 1300, '19': 1000,
-        '20': 1050, '21': 1350, '22': 1200, '23': 1550, '24': 1400, '25': 1600, '26': 1100, '27': 1450, '28': 1250,
-        '29': 1350, '30': 1700, '31': 1150, '32': 1800, '33': 1950, '34': 2000, '35': 1650, '36': 2100, '37': 2250,
-        '38': 2300, '39': 1750, '40': 2400, '41': 2500, '42': 2550, '43': 2600, '44': 2650, '45': 2700, '46': 2750,
-        '47': 2800, '48': 2850, '49': 2900, '50': 2950, '51': 3000, '52': 3050, '53': 3100, '54': 3150, '55': 3200,
-        '56': 3250, '57': 3300, '58': 3350
-    };
-
-    // Determine the shipping cost based on selected wilaya
-    if (wilaya in baseRates) {
-        shippingCost = baseRates[wilaya];
-
-        // Add additional cost if destination is home delivery
-        if (destination === 'home') {
-            shippingCost += 1500; // Additional cost for home delivery
-        }
-
-        // Display the result
-        var resultElement = document.getElementById('result');
-        resultElement.innerHTML = `تكلفة الشحن إلى ولاية ${document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text} (${destination === 'home' ? 'توصيل إلى باب المنزل' : 'توصيل إلى مكتب التوصيل'}) هي ${shippingCost} دينار جزائري.`;
-    } else {
-        // Handle case where wilaya is not found (though it should always exist in this setup)
-        alert('خطأ: يرجى اختيار ولاية صحيحة.');
-    }
-}
-</script>
+    </script>
 </body>
 </html>
+
