@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الشحن</title>
+    <style>
+        /* Basic reset and body styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f5;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            direction: rtl; /* Right-to-left text direction */
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: appear 0.5s ease-out;
+            text-align: right; /* Right-align text */
+        }
+
+        /* Animation for container */
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Heading styles */
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form group styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Label styles */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        /* Select and button styles */
+        select, button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Focus and hover styles for select and button */
+        select:focus, button:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Result box styles */
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+            animation: appear 0.5s ease-out;
+        }
+
+        /* Hover effect for form labels */
+        .form-group:hover label {
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        /* Styles for select dropdown */
+        .form-group select {
+            background-color: #f8f9fa;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .form-group select:hover {
+            border-color: #007BFF;
+            background-color: #e9ecef;
+        }
+
+        .form-group select:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Styles for select options */
+        .form-group select option {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>حاسبة الشحن</h1>
+        <div class="form-group">
+            <label for="wilaya">اختر الولاية:</label>
+            <select id="wilaya">
+                <!-- Options will be dynamically added using JavaScript -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="destination">اختر الوجهة:</label>
+            <select id="destination">
+                <option value="desk">إلى مكتب التوصيل</option>
+                <option value="home">إلى باب المنزل</option>
+            </select>
+        </div>
+        <button onclick="calculateShipping()">حساب تكلفة الشحن</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // JavaScript function to calculate shipping cost
+        function calculateShipping() {
+            var wilaya = document.getElementById('wilaya').value;
+            var destination = document.getElementById('destination').value;
+            var shippingCost = 0;
+
+            // Realistic pricing strategy based on typical shipping costs
+            var baseRates = {
+                '1': 1000, '2': 1200, '3': 1300, '4': 1100, '5': 1400, '6': 1500, '7': 1250, '8': 1600, '9': 900, '10': 1550,
+                '11': 1800, '12': 2000, '13': 2200, '14': 1900, '15': 2050, '16': 850, '17': 1250, '18': 1300, '19': 1000,
+                '20': 1050, '21': 1350, '22': 1200, '23': 1550, '24': 1400, '25': 1600, '26': 1100, '27': 1450, '28': 1250,
+                '29': 1350, '30': 1700, '31': 1150, '32': 1800, '33': 1950, '34': 2000, '35': 1650, '36': 2100, '37': 2250,
+                '38': 2300, '39': 1750, '40': 2400, '41': 2500, '42': 2550, '43': 2600, '44': 2650, '45': 2700, '46': 2750,
+                '47': 2800, '48': 2850, '49': 2900, '50': 2950, '51': 3000, '52': 3050, '53': 3100, '54': 3150, '55': 3200,
+                '56': 3250, '57': 3300, '58': 3350
+            };
+
+            // Determine the shipping cost based on selected wilaya
+            if (wilaya in baseRates) {
+                shippingCost = baseRates[wilaya];
+
+                // Add additional cost if destination is home delivery
+                if (destination === 'home') {
+                    shippingCost += 1500; // Additional cost for home delivery
+                }
+
+                // Display the result
+                var resultElement = document.getElementById('result');
+                resultElement.innerHTML = `تكلفة الشحن إلى ولاية ${document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text} (${destination === 'home' ? 'توصيل إلى باب المنزل' : 'توصيل إلى مكتب التوصيل'}) هي ${shippingCost} دينار جزائري.`;
+            } else {
+                // Handle case where wilaya is not found (though it should always exist in this setup)
+                alert('خطأ: يرجى اختيار ولاية صحيحة.');
+            }
+        }
+
+        // JavaScript function to populate wilaya options dynamically
+        document.addEventListener('DOMContentLoaded', function () {
+    var wilayaSelect = document.getElementById('wilaya');
+
+    // Populate wilaya options
+    var wilayas = {
+        '1': 'أدرار', '2': 'الشلف', '3': 'الأغواط', '4': 'أم البواقي', '5': 'باتنة', '6': 'بجاية', '7': 'بسكرة',
+        '8': 'بشار', '9': 'البليدة', '10': 'البويرة', '11': 'تمنراست', '12': 'تبسة', '13': 'تلمسان', '14': 'تيارت',
+        '15': 'تيزي وزو', '16': 'الجزائر', '17': 'الجلفة', '18': 'جيجل', '19': 'سطيف', '20': 'سعيدة', '21': 'سكيكدة',
+        '22': 'سيدي بلعباس', '23': 'عنابة', '24': 'قالمة', '25': 'قسنطينة', '26': 'المدية', '27': 'مستغانم', '28': 'المسيلة',
+        '29': 'معسكر', '30': 'ورقلة', '31': 'وهران', '32': 'البيض', '33': 'الإليزي', '34': 'برج بوعريريج', '35': 'بومرداس',
+        '36': 'الطارف', '37': 'تندوف', '38': 'تيسمسيلت', '39': 'الوادي', '40': 'خنشلة', '41': 'سوق أهراس', '42': 'تيبازة',
+        '43': 'ميلة', '44': 'عين الدفلى', '45': 'النعامة', '46': 'عين تموشنت', '47': 'غرداية', '48': 'غليزان',
+        '49': 'المغير', '50': 'المنيعة', '51': 'الناظور', '52': 'برج سعيد', '53': 'بني ورتيلان', '54': 'المريج',
+        '55': 'المزرعة', '56': 'أولاد سيدي ابراهيم', '57': 'ميهوب', '58': 'الحجار'
+    };
+
+    // Loop through the wilayas object and create options
+    for (var key in wilayas) {
+        var option = document.createElement('option');
+        option.value = key;
+        option.textContent = wilayas[key];
+        wilayaSelect.appendChild(option);
+    }
+});
+
+// JavaScript function to calculate shipping cost
+function calculateShipping() {
+    var wilaya = document.getElementById('wilaya').value;
+    var destination = document.getElementById('destination').value;
+    var shippingCost = 0;
+
+    // Realistic pricing strategy based on typical shipping costs
+    var baseRates = {
+        '1': 1000, '2': 1200, '3': 1300, '4': 1100, '5': 1400, '6': 1500, '7': 1250, '8': 1600, '9': 900, '10': 1550,
+        '11': 1800, '12': 2000, '13': 2200, '14': 1900, '15': 2050, '16': 850, '17': 1250, '18': 1300, '19': 1000,
+        '20': 1050, '21': 1350, '22': 1200, '23': 1550, '24': 1400, '25': 1600, '26': 1100, '27': 1450, '28': 1250,
+        '29': 1350, '30': 1700, '31': 1150, '32': 1800, '33': 1950, '34': 2000, '35': 1650, '36': 2100, '37': 2250,
+        '38': 2300, '39': 1750, '40': 2400, '41': 2500, '42': 2550, '43': 2600, '44': 2650, '45': 2700, '46': 2750,
+        '47': 2800, '48': 2850, '49': 2900, '50': 2950, '51': 3000, '52': 3050, '53': 3100, '54': 3150, '55': 3200,
+        '56': 3250, '57': 3300, '58': 3350
+    };
+
+    // Determine the shipping cost based on selected wilaya
+    if (wilaya in baseRates) {
+        shippingCost = baseRates[wilaya];
+
+        // Add additional cost if destination is home delivery
+        if (destination === 'home') {
+            shippingCost += 1500; // Additional cost for home delivery
+        }
+
+        // Display the result
+        var resultElement = document.getElementById('result');
+        resultElement.innerHTML = `تكلفة الشحن إلى ولاية ${document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text} (${destination === 'home' ? 'توصيل إلى باب المنزل' : 'توصيل إلى مكتب التوصيل'}) هي ${shippingCost} دينار جزائري.`;
+    } else {
+        // Handle case where wilaya is not found (though it should always exist in this setup)
+        alert('خطأ: يرجى اختيار ولاية صحيحة.');
+    }
+}
+</script>
+</body>
+</html>
