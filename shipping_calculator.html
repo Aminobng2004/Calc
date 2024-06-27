@@ -3,248 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة الشحن</title>
+    <title>حساب تكلفة الشحن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Basic reset and body styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdf9f6;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9f9f9;
             color: #333;
+            text-align: center;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            direction: rtl; /* Right-to-left text direction */
         }
 
-        /* Container styles */
-        .container {
-            max-width: 500px;
-            width: 100%;
+        #add-to-cart-btn {
+            display: block;
+            margin: 20px auto; /* Centers the button horizontally */
+            width: 80%; /* Ensures the button is the same width as other inputs */
+        }
+
+        
+
+        #calculator {
             background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            animation: appear 0.5s ease-out;
-            text-align: right; /* Right-align text */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
         }
-
-        /* Animation for container */
-        @keyframes appear {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Heading styles */
         h1 {
             color: #333;
-            text-align: center;
-            margin-bottom: 20px;
         }
-
-        /* Link styles */
-        h3 a {
-            text-decoration: none;
-            color: #333;
-            font-size: 24px;
-        }
-
-        /* Form group styles */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        /* Label styles */
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        /* Select and button styles */
-        select, button {
-            width: 100%;
-            padding: 12px;
+        input, select, button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 4px;
             border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
+            width: 80%;
         }
-
-        /* Focus and hover styles for select and button */
-        select:focus, button:focus {
-            border-color: #ffae00;
-            outline: none;
-            box-shadow: 0 0 8px rgba(255, 174, 0, 0.2);
-        }
-
         button {
-            background-color: #ffae00;
-            color: white;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: #fff;
             border: none;
             cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
         button:hover {
-            background-color: #e69500;
-            transform: scale(1.05);
+            background: linear-gradient(45deg, #ff5722, #ff9800);
         }
-
-        /* Result box styles */
-        .result {
+        #result {
             margin-top: 20px;
-            font-size: 18px;
-            text-align: center;
-            color: #333;
-            animation: appear 0.5s ease-out;
-        }
-
-        /* Hover effect for form labels */
-        .form-group:hover label {
-            color: #ffae00;
             font-weight: bold;
         }
-
-        /* Styles for select dropdown */
-        .form-group select {
-            background-color: #f8f9fa;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
-        }
-
-        .form-group select:hover {
-            border-color: #ffae00;
-            background-color: #e9ecef;
-        }
-
-        .form-group select:focus {
-            border-color: #ffae00;
-            outline: none;
-            box-shadow: 0 0 8px rgba(255, 174, 0, 0.2);
-        }
-
-        /* Styles for select options */
-        .form-group select option {
-            color: #333;
-        }
     </style>
+    <script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h3><a href="https://56f7fd-5f.myshopify.com/">🦴🌿زيت شفاء مفاصل</a></h3>
-        <h1>حاسبة الشحن</h1>
-        <div class="form-group">
-            <label for="wilaya">اختر الولاية:</label>
-            <select id="wilaya">
-                <option value="1">أدرار</option>
-                <option value="2">الشلف</option>
-                <option value="3">الأغواط</option>
-                <option value="4">أم البواقي</option>
-                <option value="5">باتنة</option>
-                <option value="6">بجاية</option>
-                <option value="7">بسكرة</option>
-                <option value="8">بشار</option>
-                <option value="9">البليدة</option>
-                <option value="10">البويرة</option>
-                <option value="11">تمنراست</option>
-                <option value="12">تبسة</option>
-                <option value="13">تلمسان</option>
-                <option value="14">تيارت</option>
-                <option value="15">تيزي وزو</option>
-                <option value="16">الجزائر</option>
-                <option value="17">الجلفة</option>
-                <option value="18">جيجل</option>
-                <option value="19">سطيف</option>
-                <option value="20">سعيدة</option>
-                <option value="21">سكيكدة</option>
-                <option value="22">سيدي بلعباس</option>
-                <option value="23">عنابة</option>
-                <option value="24">قالمة</option>
-                <option value="25">قسنطينة</option>
-                <option value="26">المدية</option>
-                <option value="27">مستغانم</option>
-                <option value="28">المسيلة</option>
-                <option value="29">معسكر</option>
-                <option value="30">ورقلة</option>
-                <option value="31">وهران</option>
-                <option value="32">البيض</option>
-                <option value="33">الإليزي</option>
-                <option value="34">برج بوعريريج</option>
-                <option value="35">بومرداس</option>
-                <option value="36">الطارف</option>
-                <option value="37">تندوف</option>
-                <option value="38">تيسمسيلت</option>
-                <option value="39">الوادي</option>
-                <option value="40">خنشلة</option>
-                <option value="41">سوق أهراس</option>
-                <option value="42">تيبازة</option>
-                <option value="43">ميلة</option>
-                <option value="44">عين الدفلى</option>
-                <option value="45">النعامة</option>
-                <option value="46">عين تموشنت</option>
-                <option value="47">غرداية</option>
-                <option value="48">غليزان</option>
-                <option value="49">المغير</option>
-                <option value="50">المنيعة</option>
-                <option value="51">تيميمون</option>
-                <option value="52">برج باجي مختار</option>
-                <option value="53">أولاد جلال</option>
-                <option value="54">بني عباس</option>
-                <option value="55">إن صالح</option>
-                <option value="56">إن قزام</option>
-                <option value="57">توقرت</option>
-                <option value="58">جانت</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="destination">اختر الوجهة:</label>
-            <select id="destination">
-                <option value="desk">إلى مكتب التوصيل</option>
-                <option value="home">إلى باب المنزل</option>
-            </select>
-        </div>
-        <button onclick="calculateShipping()">حساب تكلفة الشحن</button>
-        <div id="result" class="result"></div>
+    <header>
+        <h1><a href="https://56f7fd-5f.myshopify.com/">🦴🌿زيت شفاء مفاصل</a></h1>
+    </header>
+
+    <div id="calculator">
+        <h2>حاسبة تكلفة الشحن</h2>
+        <select id="wilaya">
+            <option value="1">أدرار</option>
+            <option value="2">الشلف</option>
+            <option value="3">الأغواط</option>
+            <option value="4">أم البواقي</option>
+            <option value="5">باتنة</option>
+            <option value="6">بجاية</option>
+            <option value="7">بسكرة</option>
+            <option value="8">بشار</option>
+            <option value="9">البليدة</option>
+            <option value="10">البويرة</option>
+            <option value="11">تامنغست</option>
+            <option value="12">تبسة</option>
+            <option value="13">تلمسان</option>
+            <option value="14">تيارت</option>
+            <option value="15">تيزي وزو</option>
+            <option value="16">الجزائر</option>
+            <option value="17">الجلفة</option>
+            <option value="18">جيجل</option>
+            <option value="19">سطيف</option>
+            <option value="20">سعيدة</option>
+            <option value="21">سكيكدة</option>
+            <option value="22">سيدي بلعباس</option>
+            <option value="23">عنابة</option>
+            <option value="24">قالمة</option>
+            <option value="25">قسنطينة</option>
+            <option value="26">المدية</option>
+            <option value="27">مستغانم</option>
+            <option value="28">المسيلة</option>
+            <option value="29">معسكر</option>
+            <option value="30">ورقلة</option>
+            <option value="31">وهران</option>
+            <option value="32">البيض</option>
+            <option value="33">إليزي</option>
+            <option value="34">برج بوعريريج</option>
+            <option value="35">بومرداس</option>
+            <option value="36">الطارف</option>
+            <option value="37">تندوف</option>
+            <option value="38">تيسمسيلت</option>
+            <option value="39">الوادي</option>
+            <option value="40">خنشلة</option>
+            <option value="41">سوق أهراس</option>
+            <option value="42">تيبازة</option>
+            <option value="43">ميلة</option>
+            <option value="44">عين الدفلى</option>
+            <option value="45">النعامة</option>
+            <option value="46">عين تموشنت</option>
+            <option value="47">غرداية</option>
+            <option value="48">غليزان</option>
+            <option value="49">تيميمون</option>
+            <option value="50">برج باجي مختار</option>
+            <option value="51">أولاد جلال</option>
+            <option value="52">بني عباس</option>
+            <option value="53">عين صالح</option>
+            <option value="54">عين قزام</option>
+            <option value="55">تقرت</option>
+            <option value="56">جانت</option>
+            <option value="57">المغير</option>
+            <option value="58">المنيعة</option>
+        </select>
+        <select id="destination">
+            <option value="desk">إلى المكتب</option>
+            <option value="home">إلى المنزل</option>
+        </select>
+        <button onclick="calculateShipping()">احسب التكلفة</button>
+        <div id="result"></div>
+        <button id="add-to-cart-btn" style="display:none;" onclick="addToCart()">إضافة إلى السلة</button>
     </div>
 
     <script>
+        // Realistic pricing strategy based on typical shipping costs
+        var baseRates = {
+            '1': 750, '2': 350, '3': 500, '4': 350, '5': 350, '6': 350, '7': 500, '8': 600, '9': 350, '10': 350,
+            '11': 1000, '12': 450, '13': 350, '14': 350, '15': 350, '16': 300, '17': 500, '18': 350, '19': 350, '20': 350, '21': 350, '22': 350, '23': 350, '24': 450, '25': 350, '26': 350, '27': 300,
+            '28': 350, '29': 350, '30': 500, '31': 250, '32': 600, '33': 1000, '34': 350, '35': 350, '36': 450,
+            '37': 800, '38': 350, '39': 500, '40': 350, '41': 450, '42': 350, '43': 350, '44': 350, '45': 600,
+            '46': 300, '47': 500, '48': 350, '49': 750, '50': 500, '51': 500, '52': 600, '53': 950, '54': 950,
+            '55': 500, '56': 1000, '57': 500, '58': 500
+        };
+
+        // Additional home delivery cost for each wilaya
+        var homeDeliveryRates = {
+            '1': 1500, '2': 800, '3': 1000, '4': 800, '5': 800, '6': 1000, '7': 1200, '8': 800, '9': 800, '10': 2000,
+            '11': 900, '12': 800, '13': 800, '14': 700, '15': 1000, '16': 800, '17': 800, '18': 800, '19': 800, '20': 800, '21': 800, '22': 800, '23': 800, '24': 900, '25': 800, '26': 800, '27': 400,
+            '28': 800, '29': 800, '30': 1100, '31': 500, '32': 1200, '33': 1950, '34': 800, '35': 800, '36': 900,
+            '37': 1700, '38': 800, '39': 1100, '40': 850, '41': 900, '42': 800, '43': 800, '44': 800, '45': 1200,
+            '46': 650, '47': 1100, '48': 800, '49': 1500, '50': 1000, '51': 1000, '52': 1200, '53': 1850, '54': 1100,
+            '55': 1100, '56': 2200, '57': 1100, '58': 1100
+        };
+
         function calculateShipping() {
             var wilaya = document.getElementById('wilaya').value;
             var destination = document.getElementById('destination').value;
-            var shippingCost = 0;
+            var shippingCost;
 
-            // Realistic pricing strategy based on typical shipping costs
-            var baseRates = {
-                '1': 750, '2': 350, '3': 500, '4': 350, '5': 350, '6': 350, '7': 500, '8': 600, '9': 350, '10': 350,
-                '11': 1000, '12': 450, '13': 350, '14': 350, '15': 350, '16': 300, '17': 500, '18': 350, '19': 350, '20': 350, '21': 350, '22': 350, '23': 350, '24': 450, '25': 350, '26': 350, '27': 300,
-                '28': 350, '29': 350, '30': 500, '31': 250, '32': 600, '33': 1000, '34': 350, '35': 350, '36': 450,
-                '37': 800, '38': 350, '39': 500, '40': 350, '41': 450, '42': 350, '43': 350, '44': 350, '45': 600,
-                '46': 300, '47': 500, '48': 350, '49': 750, '50': 500, '51': 500, '52': 600, '53': 950, '54': 950,
-                '55': 500, '56': 1000, '57': 500, '58': 500
-            };
-
-            // Determine the shipping cost based on selected wilaya
             if (wilaya in baseRates) {
                 shippingCost = baseRates[wilaya];
-
-                // Add additional cost for home delivery
                 if (destination === 'home') {
-                    shippingCost += 500;
+                    shippingCost = homeDeliveryRates[wilaya];
                 }
 
-                // Display the result
                 document.getElementById('result').innerText = `تكلفة الشحن هي ${shippingCost} دج`;
+                document.getElementById('add-to-cart-btn').style.display = 'block';
             } else {
-                // Display an error message if wilaya is not found
                 document.getElementById('result').innerText = 'يرجى اختيار ولاية صالحة';
+                document.getElementById('add-to-cart-btn').style.display = 'none';
             }
         }
+
+        function addToCart() {
+            var shippingCost = parseInt(document.getElementById('result').innerText.replace(/[^0-9]/g, ''));
+            var productId = 'your-product-id'; // Replace with your actual product ID
+            var variantId = 'your-variant-id'; // Replace with your actual variant ID
+
+            client.product.fetch(productId).then(function (product) {
+                var selectedVariant = product.variants.find(function (variant) {
+                    return variant.id === variantId;
+                });
+
+                var cartLineItem = {
+                    variantId: selectedVariant.id,
+                    quantity: 1,
+                    customAttributes: [{ key: 'Shipping Cost', value: shippingCost.toString() }]
+                };
+
+                client.checkout.addLineItems(client.checkout.id, [cartLineItem]).then(function (checkout) {
+                    window.location.href = checkout.webUrl;
+                });
+            });
+        }
+
+        var client = ShopifyBuy.buildClient({
+            domain: 'your-shop-name.myshopify.com',
+            storefrontAccessToken: 'your-storefront-access-token'
+        });
+
+        var ui = ShopifyBuy.UI.init(client);
     </script>
 </body>
 </html>
-
